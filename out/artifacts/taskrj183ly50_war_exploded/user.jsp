@@ -1,9 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=utf-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>666666666666</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
                 <a id=" modal-new" href="#modal-container-new" role="button" class="btn" data-toggle="modal">新建任务</a>
 
                 <li class="nav-item">
-                    <a class=" nav-link" href="task-one.jsp">当前任务</a>
+                    <a class=" nav-link" href="<%=request.getContextPath()%>/looktaskServlet?do=search">当前任务</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">历史任务</a>
@@ -174,7 +174,7 @@
 
                         <div class="modal-body">
 
-                            <form role="form" action="<%=request.getContextPath()%>/AddTaskServlet" method="get"
+                            <form role="form" action="<%=request.getContextPath()%>/AddTaskServlet" method="post"
                                 id="new_task_form">
                                 <div class="form-group">
 

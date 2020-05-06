@@ -1,4 +1,20 @@
+<%@page import="cn.lyscolar.ly50.javabean.*,java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
+
+<%
+    //从request取出强制类型转换
+
+    List<Task> taskList=(ArrayList<Task>)request.getAttribute("tasklist");
+    Task task=(Task) request.getAttribute("task");
+    String level=null;
+    if(taskList!=null){
+        int length=taskList.size();
+        out.print("flist size:"+length);
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -219,46 +235,64 @@
     <main role="main" class="container">
 
         <div class="row">
+            <!-- 表格开头 -->
+            <div class="col-lg-12">
+                <div class="card">
 
-            <div class="col-md-12">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">任务名称</th>
+                                <th scope="col">任务描述</th>
+                                <th scope="col">紧急程度</th>
+                                <th scope="col">截止日期</th>
+                                <th scope="col">操作</th>
+                            </tr>
+                            </thead>
+                            <%
+                                for(int i=0;i<taskList.size();i++){
+                                Task task1=taskList.get(i);
+                                if (task1.getLevel().equals("1")){
+                                    level="特急";
+                                }else if(task1.getLevel().equals("2")){
+                                    level="紧急";
+                                }else{
+                                    level="常规";
+                                }
 
-                <table class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th>任务名称</th>
-                            <th>任务描述</th>
-                            <th>紧急程度</th>
-                            <th>截止日期</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table-primary">
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                            <td>john@example.com</td>
-                            <td>
-                                <button type="button" class="btn btn-primary">开始</button>
-                                <button type="button" class="btn btn-primary">结束</button>
-                            </td>
-                        </tr>
-                        <tr class="table-success">
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                            <td>john@example.com</td>
-                            <td>
-                                <button type="button" class="btn btn-primary">开始</button>
-                                <button type="button" class="btn btn-primary">结束</button>
-                            </td>
-                        </tr>
+                            %>
+                            <tbody style="background:#C1E1CA">
 
-                    </tbody>
-                </table>
+                            <tr>
+                                <td><%=task1.getName()%></td>
+                                <td><%=task1.getDescription()%></td>
+                                <td><%=level%></td>
+
+                                <td><%=task1.getEnd()%></td>
+
+                                <td>
+
+                                    <button type="button" class="btn btn-primary btn-sm">开始</button>
+
+                                    <button type="button" class="btn btn-primary btn-sm">结束</button>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                            <%
+                                }
+                            %>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <!-- 表格结尾 -->
+
 
             </div>
-
         </div>
 
     </main>
